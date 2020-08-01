@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import PlayersTable from './PlayersTable'
 import UserPwdForm from './UserPwdForm'
 
-const LoginScreen = ({ players, isFirstPlayer, socketHandle }) => {
+const LoginScreen = ({ players, hasJoined, isFirstPlayer, socketHandle }) => {
 
     return (
         <>
@@ -13,7 +13,11 @@ const LoginScreen = ({ players, isFirstPlayer, socketHandle }) => {
                 <br />
                 <PlayersTable players={players} />
                 <br />
-                <UserPwdForm playerCt={players.length} isFirstPlayer={isFirstPlayer} socketHandle={socketHandle} />
+                <UserPwdForm
+                    playerCt={players.length}
+                    hasJoined={hasJoined}
+                    isFirstPlayer={isFirstPlayer}
+                    socketHandle={socketHandle} />
             </LoginScreenDiv>
         </>
     )

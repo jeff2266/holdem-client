@@ -1,12 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-
-
-
-
-const UserPwdForm = ({ playerCt, isFirstPlayer, socketHandle: { emitJoin, emitPlay } }) => {
-
+const UserPwdForm = ({ playerCt, hasJoined, isFirstPlayer, socketHandle: { emitJoin, emitPlay } }) => {
+    console.log(hasJoined)
     return (
         <div>
             <Form onSubmit={e => {
@@ -20,7 +16,7 @@ const UserPwdForm = ({ playerCt, isFirstPlayer, socketHandle: { emitJoin, emitPl
                     <label htmlFor="password" >Password:</label>
                     <input id="password" type="password" placeholder="enter password..." ></input>
                 </div>
-                <Button id="join-button" onClick={(e) => {
+                <Button id="join-button" disabled={hasJoined} onClick={(e) => {
                     const usernameElement = document.getElementById('username')
                     const passwordElement = document.getElementById('password')
                     emitJoin(usernameElement.value, passwordElement.value)
@@ -65,6 +61,9 @@ const Button = styled.button`
     color: #d3c9b0;
     &:hover {
         background-color: #1d391e;
+    }
+    &:disabled {
+        background-color: #49654a
     }
 `
 

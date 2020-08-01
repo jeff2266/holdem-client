@@ -5,6 +5,7 @@ import LoginScreen from './components/LoginScreen'
 
 let socket
 let isFirstPlayer = false
+let hasJoined = false
 
 function App() {
 
@@ -24,19 +25,30 @@ function App() {
   useEffect(() => {
     socket = socketIOClient(ENDPOINT)
 
-    socket.on('s_players', newPlayers => {
+    socket.on('s_players', (newPlayers) => {
       console.log(`Received players update: ${newPlayers}`)
       setPlayers(newPlayers.slice(0, 8))
     })
 
-    socket.on('s_isFirst', () => { isFirstPlayer = true })
+    socket.on('s_join_success', (isFirst) => {
+      console.log('Successfully joined room...')
+      if (isFirst) {
+        isFirstPlayer = true
+        console.log('You are the first player...')
+      }
+      hasJoined = true
+    })
 
     return () => socket.disconnect();
   }, []);
 
   return (
     <div className="App">
-      <LoginScreen players={players} isFirstPlayer={isFirstPlayer} socketHandle={{ emitJoin, emitPlay }} />
+      <LoginScreen
+        players={players}
+        hasJoined={hasJoined}
+        isFirstPlayer={isFirstPlayer}
+        socketHandle={{ emitJoin, emitPlay }} />
     </div>
   );
 }
