@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react'
 import styled from '@emotion/styled'
 
-const UserPwdForm = ({ isFirstPlayer, addPlayer: { addPlayerHandle, playerCt } }) => {
 
-    const [timeout, setTimeout] = useState(3000)
 
-    let joinButtonText = "Join"
+
+
+const UserPwdForm = ({ playerCt, isFirstPlayer, socketHandle: { emitJoin, emitPlay } }) => {
 
     return (
         <div>
             <Form onSubmit={e => {
-                e.preventDefault();
+                e.preventDefault()
             }}>
                 <div>
                     <label htmlFor="username" >Username:</label>
@@ -20,20 +20,17 @@ const UserPwdForm = ({ isFirstPlayer, addPlayer: { addPlayerHandle, playerCt } }
                     <label htmlFor="password" >Password:</label>
                     <input id="password" type="password" placeholder="enter password..." ></input>
                 </div>
-                <Button id="join-button" onClick={() => {
+                <Button id="join-button" onClick={(e) => {
                     const usernameElement = document.getElementById('username')
                     const passwordElement = document.getElementById('password')
-                    if (addPlayerHandle(usernameElement.value)) {
-                        usernameElement.disabled = true;
-                        passwordElement.disabled = true;
-                    } else {
-
-                    }
-                }}>{joinButtonText}</Button>
+                    emitJoin(usernameElement.value, passwordElement.value)
+                }}>Join</Button>
                 {
                     isFirstPlayer ?
                         (playerCt > 1) ?
-                            <Button>Play!</Button>
+                            <Button onClick={(e) => {
+                                emitPlay()
+                            }}>Play!</Button>
                             : null
                         : null
                 }
