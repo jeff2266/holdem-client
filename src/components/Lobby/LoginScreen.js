@@ -7,19 +7,17 @@ import UserPwdForm from './UserPwdForm'
 const LoginScreen = ({ players, hasJoined, isFirstPlayer, socketHandle }) => {
 
     return (
-        <>
-            <LoginScreenDiv>
-                <h1>♦ ♣ Texas Hold'em ♥ ♠</h1>
-                <br />
-                <PlayersTable players={players} />
-                <br />
-                <UserPwdForm
-                    playerCt={players.length}
-                    hasJoined={hasJoined}
-                    isFirstPlayer={isFirstPlayer}
-                    socketHandle={socketHandle} />
-            </LoginScreenDiv>
-        </>
+        <LoginScreenDiv>
+            <h1>♦ ♣ Texas Hold'em ♥ ♠</h1>
+            <br />
+            <PlayersTable players={players} />
+            <br />
+            <UserPwdForm
+                playerCt={players.length}
+                hasJoined={hasJoined}
+                isFirstPlayer={isFirstPlayer}
+                socketHandle={socketHandle} />
+        </LoginScreenDiv>
     )
 }
 

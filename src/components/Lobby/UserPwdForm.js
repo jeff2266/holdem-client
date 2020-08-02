@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 const UserPwdForm = ({ playerCt, hasJoined, isFirstPlayer, socketHandle: { emitJoin, emitPlay } }) => {
-    console.log(hasJoined)
+
     return (
         <div>
             <Form onSubmit={e => {
@@ -17,6 +17,7 @@ const UserPwdForm = ({ playerCt, hasJoined, isFirstPlayer, socketHandle: { emitJ
                     <input id="password" type="password" placeholder="enter password..." ></input>
                 </div>
                 <Button id="join-button" disabled={hasJoined} onClick={(e) => {
+                    e.preventDefault()
                     const usernameElement = document.getElementById('username')
                     const passwordElement = document.getElementById('password')
                     emitJoin(usernameElement.value, passwordElement.value)
@@ -25,6 +26,7 @@ const UserPwdForm = ({ playerCt, hasJoined, isFirstPlayer, socketHandle: { emitJ
                     isFirstPlayer ?
                         (playerCt > 1) ?
                             <Button onClick={(e) => {
+                                e.preventDefault()
                                 emitPlay()
                             }}>Play!</Button>
                             : null

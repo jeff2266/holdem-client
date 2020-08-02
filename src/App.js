@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import socketIOClient from 'socket.io-client'
 import './App.css'
-import LoginScreen from './components/LoginScreen'
+import LoginScreen from './components/Lobby/LoginScreen'
+import GameScreen from './components/Game/GameScreen'
 
 let socket
+
+// React only re renders of state variables, i.e. React will not re render if these variables
+// change value. But, that's okay because these variables only ever update right before the players
+// state variable changes. So, these variables will update, then players will update, triggering a
+// re render with all three variables updated.
 let isFirstPlayer = false
 let hasJoined = false
 
@@ -13,6 +19,7 @@ function App() {
 
   // Init state variables
   const [players, setPlayers] = useState([])
+  const [isPlay, setIsPlay] = useState(true)
 
   const emitJoin = (name, password) => {
     socket.emit('c_join', { name, password })
@@ -39,16 +46,24 @@ function App() {
       hasJoined = true
     })
 
+    socket.on('s_play', () => {
+      setIsPlay(true)
+    })
+
     return () => socket.disconnect();
   }, []);
 
   return (
     <div className="App">
-      <LoginScreen
-        players={players}
-        hasJoined={hasJoined}
-        isFirstPlayer={isFirstPlayer}
-        socketHandle={{ emitJoin, emitPlay }} />
+      {
+        !isPlay ?
+          < LoginScreen
+            players={players}
+            hasJoined={hasJoined}
+            isFirstPlayer={isFirstPlayer}
+            socketHandle={{ emitJoin, emitPlay }} />
+          : <GameScreen />
+      }
     </div>
   );
 }
