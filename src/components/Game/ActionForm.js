@@ -15,7 +15,7 @@ const ActionForm = () => {
                     <button>▼</button>
                 </RaiseUpDown>
             </RaiseSelect>
-            <CallRaiseAllInButton>Raise</CallRaiseAllInButton>
+            <CallRaiseAllInButton>Call</CallRaiseAllInButton>
         </ActionFormContainer>
     )
 

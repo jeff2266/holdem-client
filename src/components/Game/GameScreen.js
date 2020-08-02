@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { Animated } from 'react-animated-css'
 
 import PlayerContainer from './PlayerContainer'
 import Dealer from './Dealer'
@@ -9,39 +10,41 @@ import Footer from './Footer'
 const GameScreen = () => {
 
     return (
-        <GameContainer>
-            <PlayerRow>
-                {/* Empty div for spacing */}
-                <div></div>
+        <Animated animationIn="zoomIn" animationInDuration={550} isVisible={true}>
+            <GameContainer>
+                <PlayerRow>
+                    {/* Empty div for spacing */}
+                    <div></div>
 
-                <PlayerContainer />
-                <PlayerContainer />
-                <PlayerContainer />
-                <PlayerContainer />
+                    <PlayerContainer />
+                    <PlayerContainer />
+                    <PlayerContainer />
+                    <PlayerContainer />
 
-                {/* Empty div for spacing */}
-                <div></div>
-            </PlayerRow>
-            <DealerTableRow>
-                <Dealer />
-                <Table />
-                {/* Empty div for spacing */}
-                <div></div>
-            </DealerTableRow>
-            <PlayerRow>
-                {/* Empty div for spacing */}
-                <div></div>
+                    {/* Empty div for spacing */}
+                    <div></div>
+                </PlayerRow>
+                <DealerTableRow>
+                    <Dealer />
+                    <Table />
+                    {/* Empty div for spacing */}
+                    <div></div>
+                </DealerTableRow>
+                <PlayerRow>
+                    {/* Empty div for spacing */}
+                    <div></div>
 
-                <PlayerContainer />
-                <PlayerContainer />
-                <PlayerContainer />
-                <PlayerContainer />
+                    <PlayerContainer />
+                    <PlayerContainer />
+                    <PlayerContainer />
+                    <PlayerContainer />
 
-                {/* Empty div for spacing */}
-                <div></div>
-            </PlayerRow>
-            <Footer />
-        </GameContainer>
+                    {/* Empty div for spacing */}
+                    <div></div>
+                </PlayerRow>
+                <Footer />
+            </GameContainer>
+        </Animated>
     )
 }
 
