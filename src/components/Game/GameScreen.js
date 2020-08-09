@@ -10,23 +10,74 @@ import Footer from './Footer'
 const GameScreen = () => {
 
     return (
-        <Animated animationIn="zoomIn" animationInDuration={550} isVisible={true}>
+        <Animated animationIn='zoomIn' animationInDuration={550} isVisible={true}>
             <GameContainer>
                 <PlayerRow>
                     {/* Empty div for spacing */}
                     <div></div>
 
+                    <PlayerContainer
+                        playerState={{
+                            name: 'Player',
+                            balance: 200,
+                            blind: 'D',
+                            pocket: [
+                                {
+                                    suit: '♠',
+                                    value: 'J'
+                                }
+                            ],
+                            cardsUp: false
+                        }} />
                     <PlayerContainer />
-                    <PlayerContainer />
-                    <PlayerContainer />
-                    <PlayerContainer />
+                    <PlayerContainer
+                        playerState={{
+                            name: 'Player',
+                            balance: 200,
+                            pocket: [
+                                {
+                                    suit: '♠',
+                                    value: 'J'
+                                },
+                                {
+                                    suit: '♠',
+                                    value: 'K'
+                                }
+                            ],
+                            cardsUp: false
+                        }} />
+                    <PlayerContainer
+                        playerState={{
+                            name: 'Player',
+                            balance: 200,
+                            blind: 'B',
+                            pocket: [
+                                {
+                                    suit: '♠',
+                                    value: 'J'
+                                },
+                                {
+                                    suit: '♠',
+                                    value: 'K'
+                                }
+                            ],
+                            cardsUp: false
+                        }} />
 
                     {/* Empty div for spacing */}
                     <div></div>
                 </PlayerRow>
                 <DealerTableRow>
-                    <Dealer />
-                    <Table />
+                    <Dealer message="Welcome to Texas Hold'em!" />
+                    <Table
+                        window={[
+                            { suit: '♠', value: '2' },
+                            { suit: '♠', value: '7' },
+                            { suit: '♥', value: 'K' },
+                            { suit: '♥', value: 'Q' },
+                            { suit: '♣', value: '5' }
+                        ]}
+                        bets={[0, 0, 0, 0]} />
                     {/* Empty div for spacing */}
                     <div></div>
                 </DealerTableRow>
@@ -34,10 +85,74 @@ const GameScreen = () => {
                     {/* Empty div for spacing */}
                     <div></div>
 
-                    <PlayerContainer />
-                    <PlayerContainer />
-                    <PlayerContainer />
-                    <PlayerContainer />
+                    <PlayerContainer
+                        playerState={{
+                            name: 'Player',
+                            balance: 200,
+                            blind: 'D',
+                            pocket: [
+                                {
+                                    suit: '♠',
+                                    value: 'J'
+                                },
+                                {
+                                    suit: '♠',
+                                    value: 'K'
+                                }
+                            ],
+                            cardsUp: false
+                        }} />
+                    <PlayerContainer
+                        playerState={{
+                            name: 'Player',
+                            balance: 200,
+                            blind: 'D',
+                            pocket: [
+                                {
+                                    suit: '♠',
+                                    value: 'J'
+                                },
+                                {
+                                    suit: '♠',
+                                    value: 'K'
+                                }
+                            ],
+                            cardsUp: false
+                        }} />
+                    <PlayerContainer
+                        playerState={{
+                            name: 'Player',
+                            balance: 200,
+                            blind: 'D',
+                            pocket: [
+                                {
+                                    suit: '♠',
+                                    value: 'J'
+                                },
+                                {
+                                    suit: '♠',
+                                    value: 'K'
+                                }
+                            ],
+                            cardsUp: false
+                        }} />
+                    <PlayerContainer
+                        playerState={{
+                            name: 'Player',
+                            balance: 200,
+                            blind: 'D',
+                            pocket: [
+                                {
+                                    suit: '♠',
+                                    value: 'J'
+                                },
+                                {
+                                    suit: '♠',
+                                    value: 'K'
+                                }
+                            ],
+                            cardsUp: true
+                        }} />
 
                     {/* Empty div for spacing */}
                     <div></div>

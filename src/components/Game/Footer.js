@@ -10,7 +10,7 @@ const Footer = () => {
             <button onClick={(e) => {
                 e.preventDefault()
             }}>◀&nbsp;&nbsp;&nbsp;Leave Room</button>
-            <ActionForm />
+            <ActionForm isTurn={true} toCall={100} minBet={10} balance={150} />
         </PlayerContainerDiv>
     )
 

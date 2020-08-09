@@ -1,18 +1,24 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-const Table = () => {
+import Card from './Card'
+
+const Table = ({ window, bets }) => {
 
     return (
         <TableContainer>
             <TopBottomBets>
-                <Bet>
+                <Bet id='player-bet-1'>
                     <div>$</div>
-                    <div>--</div>
+                    {
+                        (bets[1] === undefined) ? <div>--</div> : <div>{bets[1]}</div>
+                    }
                 </Bet>
-                <Bet>
+                <Bet id='player-bet-2'>
                     <div>$</div>
-                    <div>--</div>
+                    {
+                        (bets[2] === undefined) ? <div>--</div> : <div>{bets[2]}</div>
+                    }
                 </Bet>
             </TopBottomBets>
 
@@ -22,30 +28,38 @@ const Table = () => {
                 <div></div>
 
                 <LeftRightBets>
-                    <Bet>
+                    <Bet id='player-bet-0'>
                         <div>$</div>
-                        <div>--</div>
+                        {
+                            (bets[0] === undefined) ? <div>--</div> : <div>{bets[0]}</div>
+                        }
                     </Bet>
-                    <Bet>
+                    <Bet id='player-bet-7'>
                         <div>$</div>
-                        <div>--</div>
+                        {
+                            (bets[7] === undefined) ? <div>--</div> : <div>{bets[7]}</div>
+                        }
                     </Bet>
                 </LeftRightBets>
                 <Window>
-                    <img src="images/card_back.png" />
-                    <img src="images/card_back.png" />
-                    <img src="images/card_back.png" />
-                    <img src="images/card_back.png" />
-                    <img src="images/card_back.png" />
+                    {
+                        (window !== undefined) ?
+                            window.map(v => <Card card={{ suit: v.suit, value: v.value }} isUp={true} />)
+                            : <div />
+                    }
                 </Window>
                 <LeftRightBets>
-                    <Bet>
+                    <Bet id='player-bet-3'>
                         <div>$</div>
-                        <div>--</div>
+                        {
+                            (bets[3] === undefined) ? <div>--</div> : <div>{bets[3]}</div>
+                        }
                     </Bet>
-                    <Bet>
+                    <Bet id='player-bet-4'>
                         <div>$</div>
-                        <div>--</div>
+                        {
+                            (bets[4] === undefined) ? <div>--</div> : <div>{bets[4]}</div>
+                        }
                     </Bet>
                 </LeftRightBets>
 
@@ -54,13 +68,17 @@ const Table = () => {
             </BetsAndWindowContainer>
 
             <TopBottomBets>
-                <Bet>
+                <Bet id='player-bet-6'>
                     <div>$</div>
-                    <div>--</div>
+                    {
+                        (bets[6] === undefined) ? <div>--</div> : <div>{bets[6]}</div>
+                    }
                 </Bet>
-                <Bet>
+                <Bet id='player-bet-5'>
                     <div>$</div>
-                    <div>--</div>
+                    {
+                        (bets[5] === undefined) ? <div>--</div> : <div>{bets[5]}</div>
+                    }
                 </Bet>
             </TopBottomBets>
         </TableContainer>
@@ -88,7 +106,7 @@ const BetsAndWindowContainer = styled.div`
 `
 
 const LeftRightBets = styled.div`
-    display       : flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
@@ -106,7 +124,7 @@ const Bet = styled.div`
 const Window = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     img {
         margin: 2px;
     }

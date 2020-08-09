@@ -16,6 +16,8 @@ const UserPwdForm = ({ playerCt, hasJoined, isFirstPlayer, socketHandle: { emitJ
                     <label htmlFor="password" >Password:</label>
                     <input id="password" type="password" placeholder="enter password..." ></input>
                 </div>
+
+                {/* TODO: Validate username (check not empty) */}
                 <Button id="join-button" disabled={hasJoined} onClick={(e) => {
                     e.preventDefault()
                     const usernameElement = document.getElementById('username')

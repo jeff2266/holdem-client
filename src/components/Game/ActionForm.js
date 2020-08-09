@@ -1,21 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from '@emotion/styled'
 
-const ActionForm = () => {
+import useAudio from '../useAudio'
+
+const ActionForm = ({ isTurn, toCall, minBet, balance }) => {
+
+    const [raiseAmount, setRaiseAmount] = useState(Math.min(toCall, balance))
+    const [play] = useAudio('sounds/click.wav')
 
     return (
         <ActionFormContainer>
-            <button>Fold</button>
-            <button>Check</button>
             <h3>$</h3>
             <RaiseSelect>
-                <RaiseAmount>200</RaiseAmount>
+                <RaiseAmount id='raise-amount'>{raiseAmount}</RaiseAmount>
                 <RaiseUpDown>
-                    <button>▲</button>
-                    <button>▼</button>
+                    <button id='raise-up-button' disabled={!isTurn || raiseAmount === balance} onClick={(e) => {
+                        e.preventDefault()
+                        play()
+                        if (raiseAmount === balance) return
+                        setRaiseAmount(Math.min(raiseAmount + minBet, balance))
+                    }}>▲</button>
+                    <button id='raise-down-button' disabled={!isTurn || raiseAmount <= toCall} onClick={(e) => {
+                        e.preventDefault()
+                        play()
+                        if (raiseAmount === balance) {
+                            if (balance <= toCall) return
+                            if ((raiseAmount - toCall) % minBet !== 0) {
+                                setRaiseAmount(raiseAmount - (raiseAmount % minBet))
+                                return
+                            }
+                        }
+                        setRaiseAmount(Math.max(toCall, raiseAmount - minBet))
+                    }}>▼</button>
                 </RaiseUpDown>
             </RaiseSelect>
-            <CallRaiseAllInButton>Call</CallRaiseAllInButton>
+            <ActionButton id='call-button' disabled={!isTurn} onClick={(e) => {
+                e.preventDefault()
+            }}>{
+                    (raiseAmount === balance) ? <>All In</>
+                        : (raiseAmount === toCall) ?
+                            (toCall === 0) ? <>Check</>
+                                : <>Call</>
+                            : <>Raise</>
+                }</ActionButton>
+            <ActionButton id='fold-button' disabled={!isTurn} onClick={(e) => {
+                e.preventDefault()
+            }}>Fold</ActionButton>
         </ActionFormContainer>
     )
 
@@ -23,7 +53,7 @@ const ActionForm = () => {
 
 const ActionFormContainer = styled.form`
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 4fr 2fr;
+    grid-template-columns: 1fr 4fr 2fr 2fr;
     grid-column-gap: 8px;
     align-items: flex-end;
     justify-content: space-between;
@@ -54,12 +84,26 @@ const RaiseUpDown = styled.div`
     flex-direction: column;
     button {
         margin: 1px;
+        &:hover {
+            background-color: #1d391e;
+        }
+        &:disabled {
+            background-color: #49654a
+        }
     }
 `
 
-const CallRaiseAllInButton = styled.button`
+const ActionButton = styled.button`
     margin: 1px;
     align-self: stretch;
+    button {
+        &:hover {
+            background-color: #1d391e;
+        }
+        &:disabled {
+            background-color: #49654a
+        }
+    }
 `
 
 export default ActionForm

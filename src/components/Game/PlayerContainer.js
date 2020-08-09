@@ -2,23 +2,52 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Animated } from 'react-animated-css'
 
-const PlayerContainer = () => {
+import Card from './Card'
+import PlayerStatus from './PlayerStatus'
+
+const PlayerContainer = ({ playerState }) => {
 
     return (
-        <PlayerContainerDiv>
-            <HandDiv>
-                <img src="images/card_back.png" />
-                <img src="images/card_back.png" />
-            </HandDiv>
-            {
-                // Player exists?
-                <PlayerStatusDiv>
-                    <div>Player</div>
-                    <div>$200</div>
-                    <div>D</div>
-                </PlayerStatusDiv>
-            }
-        </PlayerContainerDiv>
+        <>{
+            (playerState !== undefined) ?
+                <PlayerContainerDiv>
+                    <HandDiv>
+                        {
+                            (playerState.pocket[0] !== undefined) ?
+                                <Animated animationIn='fadeInLeft' animationInDuration={250} isVisible={true}>
+                                    <Card
+                                        card={{ suit: playerState.pocket[0].suit, value: playerState.pocket[0].value }}
+                                        isUp={playerState.cardsUp} />
+                                </Animated>
+                                : <Animated animationOut='fadeOut' animationOutDuration={0} isVisible={false}>
+                                    < Card
+                                        card={{ suit: 'x', value: 'x' }}
+                                        isUp={playerState.cardsUp}
+                                        isVisible={false} />
+                                </Animated>
+                        }
+                        {
+                            (playerState.pocket[1] !== undefined) ?
+                                <Animated animationIn='fadeInLeft' animationInDuration={250} isVisible={true}>
+                                    <Card
+                                        card={{ suit: playerState.pocket[1].suit, value: playerState.pocket[1].value }}
+                                        isUp={playerState.cardsUp} />
+                                </Animated>
+                                : <Animated animationOut='fadeOut' animationOutDuration={0} isVisible={false}>
+                                    < Card
+                                        card={{ suit: 'x', value: 'x' }}
+                                        isUp={playerState.cardsUp}
+                                        isVisible={false} />
+                                </Animated>
+                        }
+                    </HandDiv>
+                    <PlayerStatus name={playerState.name} balance={playerState.balance} blind={playerState.blind} />
+                </PlayerContainerDiv>
+                : <PlayerContainerDiv>
+                    <HandDiv />
+                    <PlayerStatus />
+                </PlayerContainerDiv>
+        }</>
     )
 
 }
@@ -35,17 +64,6 @@ const HandDiv = styled.div`
     img {
         margin: 4px;
     }
-`
-
-const PlayerStatusDiv = styled.div`
-    display: grid;
-    grid-template-columns: 3fr 2fr 1fr;
-    text-align: center;
-    align-content: center;
-    border: 4px solid rgba(233, 192, 154, 0.8);
-    border-radius: 8px;
-    background-color: rgba(50, 50, 50, .8);
-    margin: 12px;
 `
 
 export default PlayerContainer

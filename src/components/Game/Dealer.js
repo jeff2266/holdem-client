@@ -1,14 +1,18 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-const Dealer = () => {
+const Dealer = ({ message }) => {
 
     return (
         <DealerContainer>
             <DealerImageContainer>
-                <img src="images/dealer.png" alt="dealer.png" />
+                <img src='images/dealer.png' alt='dealer.png' />
             </DealerImageContainer>
-            <DealerPrompt>Action Player 1</DealerPrompt>
+            {
+                (message !== undefined) ?
+                    <DealerPrompt>{message}</DealerPrompt>
+                    : <DealerPrompt />
+            }
         </DealerContainer>
     )
 }
