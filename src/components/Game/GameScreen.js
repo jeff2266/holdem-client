@@ -7,7 +7,10 @@ import Dealer from './Dealer'
 import Table from './Table'
 import Footer from './Footer'
 
-const GameScreen = () => {
+const GameScreen = ({ guiState, myName }) => {
+    console.log(guiState, myName)
+    let myState = guiState.playerStates.find(x => x.name === myName)
+    if (myState) myState.cardsUp = true
 
     return (
         <Animated animationIn='zoomIn' animationInDuration={550} isVisible={true}>
@@ -17,67 +20,27 @@ const GameScreen = () => {
                     <div></div>
 
                     <PlayerContainer
-                        playerState={{
-                            name: 'Player',
-                            balance: 200,
-                            blind: 'D',
-                            pocket: [
-                                {
-                                    suit: '♠',
-                                    value: 'J'
-                                }
-                            ],
-                            cardsUp: false
-                        }} />
-                    <PlayerContainer />
+                        id='player-container-0'
+                        playerState={guiState.playerStates[0] ? guiState.playerStates[0] : null} />
                     <PlayerContainer
-                        playerState={{
-                            name: 'Player',
-                            balance: 200,
-                            pocket: [
-                                {
-                                    suit: '♠',
-                                    value: 'J'
-                                },
-                                {
-                                    suit: '♠',
-                                    value: 'K'
-                                }
-                            ],
-                            cardsUp: false
-                        }} />
+                        id='player-container-1'
+                        playerState={guiState.playerStates[1] ? guiState.playerStates[1] : null} />
                     <PlayerContainer
-                        playerState={{
-                            name: 'Player',
-                            balance: 200,
-                            blind: 'B',
-                            pocket: [
-                                {
-                                    suit: '♠',
-                                    value: 'J'
-                                },
-                                {
-                                    suit: '♠',
-                                    value: 'K'
-                                }
-                            ],
-                            cardsUp: false
-                        }} />
+                        id='player-container-2'
+                        playerState={guiState.playerStates[2] ? guiState.playerStates[2] : null} />
+                    <PlayerContainer
+                        id='player-container-3'
+                        playerState={guiState.playerStates[3] ? guiState.playerStates[3] : null} />
 
                     {/* Empty div for spacing */}
                     <div></div>
                 </PlayerRow>
                 <DealerTableRow>
-                    <Dealer message="Welcome to Texas Hold'em!" />
+                    <Dealer message={guiState.message} />
                     <Table
-                        window={[
-                            { suit: '♠', value: '2' },
-                            { suit: '♠', value: '7' },
-                            { suit: '♥', value: 'K' },
-                            { suit: '♥', value: 'Q' },
-                            { suit: '♣', value: '5' }
-                        ]}
-                        bets={[0, 0, 0, 0]} />
+                        window={guiState.window}
+                        bets={guiState.playerStates.map(x => x.bet)} />
+
                     {/* Empty div for spacing */}
                     <div></div>
                 </DealerTableRow>
@@ -86,78 +49,22 @@ const GameScreen = () => {
                     <div></div>
 
                     <PlayerContainer
-                        playerState={{
-                            name: 'Player',
-                            balance: 200,
-                            blind: 'D',
-                            pocket: [
-                                {
-                                    suit: '♠',
-                                    value: 'J'
-                                },
-                                {
-                                    suit: '♠',
-                                    value: 'K'
-                                }
-                            ],
-                            cardsUp: false
-                        }} />
+                        id='player-container-7'
+                        playerState={guiState.playerStates[7] ? guiState.playerStates[7] : null} />
                     <PlayerContainer
-                        playerState={{
-                            name: 'Player',
-                            balance: 200,
-                            blind: 'D',
-                            pocket: [
-                                {
-                                    suit: '♠',
-                                    value: 'J'
-                                },
-                                {
-                                    suit: '♠',
-                                    value: 'K'
-                                }
-                            ],
-                            cardsUp: false
-                        }} />
+                        id='player-container-6'
+                        playerState={guiState.playerStates[6] ? guiState.playerStates[6] : null} />
                     <PlayerContainer
-                        playerState={{
-                            name: 'Player',
-                            balance: 200,
-                            blind: 'D',
-                            pocket: [
-                                {
-                                    suit: '♠',
-                                    value: 'J'
-                                },
-                                {
-                                    suit: '♠',
-                                    value: 'K'
-                                }
-                            ],
-                            cardsUp: false
-                        }} />
+                        id='player-container-5'
+                        playerState={guiState.playerStates[5] ? guiState.playerStates[5] : null} />
                     <PlayerContainer
-                        playerState={{
-                            name: 'Player',
-                            balance: 200,
-                            blind: 'D',
-                            pocket: [
-                                {
-                                    suit: '♠',
-                                    value: 'J'
-                                },
-                                {
-                                    suit: '♠',
-                                    value: 'K'
-                                }
-                            ],
-                            cardsUp: true
-                        }} />
+                        id='player-container-4'
+                        playerState={guiState.playerStates[4] ? guiState.playerStates[4] : null} />
 
                     {/* Empty div for spacing */}
                     <div></div>
                 </PlayerRow>
-                <Footer />
+                <Footer myState={myState} minBet={guiState.minBet} />
             </GameContainer>
         </Animated>
     )

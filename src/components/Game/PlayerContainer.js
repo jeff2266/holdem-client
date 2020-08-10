@@ -9,7 +9,7 @@ const PlayerContainer = ({ playerState }) => {
 
     return (
         <>{
-            (playerState !== undefined) ?
+            (playerState !== undefined && playerState !== null) ?
                 <PlayerContainerDiv>
                     <HandDiv>
                         {

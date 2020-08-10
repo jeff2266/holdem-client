@@ -9,8 +9,7 @@ const Dealer = ({ message }) => {
                 <img src='images/dealer.png' alt='dealer.png' />
             </DealerImageContainer>
             {
-                (message !== undefined) ?
-                    <DealerPrompt>{message}</DealerPrompt>
+                (message !== undefined) ? <DealerPrompt>{message}</DealerPrompt>
                     : <DealerPrompt />
             }
         </DealerContainer>
@@ -21,6 +20,7 @@ const DealerContainer = styled.div`
     display: grid;
     grid-template-rows: 3fr, 2fr;
     align-items: stretch;
+    justify-content: stretch;
 `
 
 const DealerImageContainer = styled.div`
@@ -35,11 +35,11 @@ const DealerImageContainer = styled.div`
 `
 
 const DealerPrompt = styled.div`
-    padding         : 8px;
-    border          : 4px solid rgba(233, 192, 154, 0.8);
-    border-radius   : 8px;
+    padding: 8px;
+    border: 4px solid rgba(233, 192, 154, 0.8);
+    border-radius: 8px;
     background-color: rgba(50, 50, 50, .8);
-    text-align      : center;
+    text-align: center;
 `
 
 export default Dealer

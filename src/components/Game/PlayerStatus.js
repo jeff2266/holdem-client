@@ -9,7 +9,7 @@ const PlayerStatus = ({ name, balance, blind }) => {
                 <PlayerStatusDiv>
                     <div>{name}</div>
                     <div>${balance}</div>
-                    <div>{(blind) ? blind : null}</div>
+                    <div>{(blind) ? [...blind] : null}</div>
                 </PlayerStatusDiv>
                 : <PlayerStatusDiv>
                     <div>--</div>

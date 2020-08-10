@@ -12,6 +12,8 @@ let socket
 // re render with all three variables updated.
 let isFirstPlayer = false
 let hasJoined = false
+let myName = null
+
 
 function App() {
 
@@ -19,7 +21,13 @@ function App() {
 
   // Init state variables
   const [players, setPlayers] = useState([])
-  const [isPlay, setIsPlay] = useState(true)
+  const [isPlay, setIsPlay] = useState(false)
+  const [guiState, setGuiState] = useState({
+    message: "Welcome to Texas Hold'em!",
+    window: [],
+    minBet: null,
+    playerStates: []
+  })
 
   const emitJoin = (name, password) => {
     socket.emit('c_join', { name, password })
@@ -37,17 +45,22 @@ function App() {
       setPlayers(newPlayers.slice(0, 8))
     })
 
-    socket.on('s_join_success', (isFirst) => {
+    socket.on('s_join_success', (isFirst, name) => {
       console.log('Successfully joined room...')
       if (isFirst) {
         isFirstPlayer = true
         console.log('You are the first player...')
       }
       hasJoined = true
+      myName = name
     })
 
     socket.on('s_play', () => {
       setIsPlay(true)
+    })
+
+    socket.on('s_gui_state', (newGuiState) => {
+      setGuiState(newGuiState)
     })
 
     return () => socket.disconnect();
@@ -62,7 +75,7 @@ function App() {
             hasJoined={hasJoined}
             isFirstPlayer={isFirstPlayer}
             socketHandle={{ emitJoin, emitPlay }} />
-          : <GameScreen />
+          : <GameScreen guiState={guiState} myName={myName} />
       }
     </div>
   );

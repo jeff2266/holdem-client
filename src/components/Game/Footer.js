@@ -3,14 +3,18 @@ import styled from '@emotion/styled'
 
 import ActionForm from './ActionForm'
 
-const Footer = () => {
+const Footer = ({ myState, minBet }) => {
 
     return (
         <PlayerContainerDiv>
             <button onClick={(e) => {
                 e.preventDefault()
             }}>◀&nbsp;&nbsp;&nbsp;Leave Room</button>
-            <ActionForm isTurn={true} toCall={100} minBet={10} balance={150} />
+            {
+                (myState) ?
+                    <ActionForm isTurn={myState.isTurn} toCall={myState.toCall} minBet={minBet} balance={myState.balance} />
+                    : <ActionForm isTurn={false} toCall={null} minBet={null} balance={null} />
+            }
         </PlayerContainerDiv>
     )
 
