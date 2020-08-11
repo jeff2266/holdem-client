@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 
 import useAudio from '../useAudio'
@@ -7,6 +7,11 @@ const ActionForm = ({ isTurn, toCall, minBet, balance }) => {
 
     const [raiseAmount, setRaiseAmount] = useState(Math.min(toCall, balance))
     const [play] = useAudio('sounds/click.wav')
+
+    useEffect(() => {
+        console.log(toCall)
+        setRaiseAmount(toCall)
+    }, [toCall])
 
     return (
         <ActionFormContainer>
