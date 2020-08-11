@@ -10,10 +10,8 @@ let socket
 // change value. But, that's okay because these variables only ever update right before the players
 // state variable changes. So, these variables will update, then players will update, triggering a
 // re render with all three variables updated.
-let isFirstPlayer = false
 let hasJoined = false
 let myName = null
-
 
 function App() {
 
@@ -21,6 +19,7 @@ function App() {
 
   // Init state variables
   const [players, setPlayers] = useState([])
+  const [isFirstPlayer, setIsFirstPlayer] = useState(false)
   const [isPlay, setIsPlay] = useState(false)
   const [guiState, setGuiState] = useState({
     message: "Welcome to Texas Hold'em!",
@@ -48,7 +47,7 @@ function App() {
     socket.on('s_join_success', (isFirst, name) => {
       console.log('Successfully joined room...')
       if (isFirst) {
-        isFirstPlayer = true
+        setIsFirstPlayer(true)
         console.log('You are the first player...')
       }
       hasJoined = true
