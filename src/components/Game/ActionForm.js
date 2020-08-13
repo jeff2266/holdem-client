@@ -3,13 +3,12 @@ import styled from '@emotion/styled'
 
 import useAudio from '../useAudio'
 
-const ActionForm = ({ isTurn, toCall, minBet, balance }) => {
+const ActionForm = ({ isTurn, toCall, minBet, balance, emitAction }) => {
 
     const [raiseAmount, setRaiseAmount] = useState(Math.min(toCall, balance))
     const [play] = useAudio('sounds/click.wav')
 
     useEffect(() => {
-        console.log(toCall)
         setRaiseAmount(toCall)
     }, [toCall])
 
@@ -41,6 +40,7 @@ const ActionForm = ({ isTurn, toCall, minBet, balance }) => {
             </RaiseSelect>
             <ActionButton id='call-button' disabled={!isTurn} onClick={(e) => {
                 e.preventDefault()
+                emitAction(raiseAmount)
             }}>{
                     (raiseAmount === balance) ? <>All In</>
                         : (raiseAmount === toCall) ?

@@ -36,6 +36,10 @@ function App() {
     socket.emit('c_play', players)
   }
 
+  const emitAction = (amount) => {
+    socket.emit('c_action', amount)
+  }
+
   useEffect(() => {
     socket = socketIOClient(ENDPOINT)
 
@@ -74,7 +78,7 @@ function App() {
             hasJoined={hasJoined}
             isFirstPlayer={isFirstPlayer}
             socketHandle={{ emitJoin, emitPlay }} />
-          : <GameScreen guiState={guiState} myName={myName} />
+          : <GameScreen guiState={guiState} myName={myName} emitAction={emitAction} />
       }
     </div>
   );

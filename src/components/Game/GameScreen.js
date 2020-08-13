@@ -7,7 +7,7 @@ import Dealer from './Dealer'
 import Table from './Table'
 import Footer from './Footer'
 
-const GameScreen = ({ guiState, myName }) => {
+const GameScreen = ({ guiState, myName, emitAction }) => {
     console.log(guiState, myName)
     let myState = guiState.playerStates.find(x => x.name === myName)
     if (myState) myState.cardsUp = true
@@ -64,7 +64,7 @@ const GameScreen = ({ guiState, myName }) => {
                     {/* Empty div for spacing */}
                     <div></div>
                 </PlayerRow>
-                <Footer myState={myState} minBet={guiState.minBet} />
+                <Footer myState={myState} minBet={guiState.minBet} emitAction={emitAction} />
             </GameContainer>
         </Animated>
     )
