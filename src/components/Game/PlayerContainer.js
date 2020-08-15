@@ -41,7 +41,7 @@ const PlayerContainer = ({ playerState }) => {
                                 </Animated>
                         }
                     </HandDiv>
-                    <PlayerStatus name={playerState.name} balance={playerState.balance} blind={playerState.blind} />
+                    <PlayerStatus name={playerState.name} balance={playerState.balance} blind={playerState.blind} isTurn={playerState.isTurn} />
                 </PlayerContainerDiv>
                 : <PlayerContainerDiv>
                     <HandDiv />

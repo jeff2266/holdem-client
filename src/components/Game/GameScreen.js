@@ -39,7 +39,8 @@ const GameScreen = ({ guiState, myName, emitAction }) => {
                     <Dealer message={guiState.message} />
                     <Table
                         window={guiState.window}
-                        bets={guiState.playerStates.map(x => x.bet)} />
+                        bets={guiState.playerStates.map(x => x.bet)}
+                        isTurn={guiState.playerStates.map(x => x.isTurn)} />
 
                     {/* Empty div for spacing */}
                     <div></div>

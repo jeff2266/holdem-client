@@ -15,7 +15,7 @@ let myName = null
 
 function App() {
 
-  const ENDPOINT = 'localhost:3001'
+  const ENDPOINT = 'https://texas-holdem-08-2020.herokuapp.com/'
 
   // Init state variables
   const [players, setPlayers] = useState([])

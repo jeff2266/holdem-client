@@ -10,7 +10,7 @@ const ActionForm = ({ isTurn, toCall, minBet, balance, emitAction }) => {
 
     useEffect(() => {
         setRaiseAmount(toCall)
-    }, [toCall])
+    }, [toCall, isTurn])
 
     return (
         <ActionFormContainer>
@@ -20,13 +20,12 @@ const ActionForm = ({ isTurn, toCall, minBet, balance, emitAction }) => {
                 <RaiseUpDown>
                     <button id='raise-up-button' disabled={!isTurn || raiseAmount === balance} onClick={(e) => {
                         e.preventDefault()
-                        play()
                         if (raiseAmount === balance) return
                         setRaiseAmount(Math.min(raiseAmount + minBet, balance))
+                        play()
                     }}>▲</button>
                     <button id='raise-down-button' disabled={!isTurn || raiseAmount <= toCall} onClick={(e) => {
                         e.preventDefault()
-                        play()
                         if (raiseAmount === balance) {
                             if (balance <= toCall) return
                             if ((raiseAmount - toCall) % minBet !== 0) {
@@ -35,6 +34,7 @@ const ActionForm = ({ isTurn, toCall, minBet, balance, emitAction }) => {
                             }
                         }
                         setRaiseAmount(Math.max(toCall, raiseAmount - minBet))
+                        play()
                     }}>▼</button>
                 </RaiseUpDown>
             </RaiseSelect>
@@ -50,6 +50,7 @@ const ActionForm = ({ isTurn, toCall, minBet, balance, emitAction }) => {
                 }</ActionButton>
             <ActionButton id='fold-button' disabled={!isTurn} onClick={(e) => {
                 e.preventDefault()
+                emitAction(-1)
             }}>Fold</ActionButton>
         </ActionFormContainer>
     )
