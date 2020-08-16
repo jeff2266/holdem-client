@@ -9,7 +9,7 @@ const Footer = ({ myState, minBet, emitAction }) => {
         <PlayerContainerDiv>
             <button onClick={(e) => {
                 e.preventDefault()
-                reload()
+                window.location.reload(true)
             }}>◀&nbsp;&nbsp;&nbsp;Leave Room</button>
             {
                 (myState) ?
