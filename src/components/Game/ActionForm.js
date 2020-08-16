@@ -9,8 +9,8 @@ const ActionForm = ({ isTurn, toCall, minBet, balance, emitAction }) => {
     const [play] = useAudio('sounds/click.wav')
 
     useEffect(() => {
-        setRaiseAmount(toCall)
-    }, [toCall, isTurn])
+        setRaiseAmount(Math.min(toCall, balance))
+    }, [toCall, isTurn, balance])
 
     return (
         <ActionFormContainer>
